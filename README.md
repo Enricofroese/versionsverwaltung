@@ -1,0 +1,6 @@
+# versionsverwaltung
+In diesem Repository wird ein einfaches Werkzeug zur Versionsverwaltung gebaut.
+Dazu verwenden wir Maven.
+
+Softwarearchitektur im Miro
+https://miro.com/welcomeonboard/Mm1sc1VEM2pYSnlPS0Z2MGZ5VjRRcFFSR2FDNFVGb0FnZ3Vpd1EzRTVGM3M5Rmw4ZHBIY3pNZmtBODlhdVRPVXwzNDU4NzY0NTIyODM2Mzg0MDU4fDI=?share_link_id=306644189136
