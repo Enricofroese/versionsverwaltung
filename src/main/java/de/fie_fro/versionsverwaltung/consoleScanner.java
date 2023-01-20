@@ -4,19 +4,40 @@ import java.util.Scanner;
 
 public class consoleScanner {
 	
-	public void main(String[] args) {
-		System.out.println(readConsole());
+	public static void main(String[] args) {
+		readConsole();
 	}
-	private String readConsole() {
+	
+	private static void readConsole() {
 		Scanner scanner = new Scanner(System.in);
 		String input = "";
-		while(true) {
+		while(true) 
+		{
 			input = scanner.nextLine();
-			if(input == "Abbruch") {
+			evaluateConsoleInput(input);
+			if(input.equals("exit")) 
+			{
+				writeConsole("Console wird geschlossen");
 				break;
 			}
 		}
 		scanner.close();
-		return input;
+	}
+	
+	private static void writeConsole(String pInfo)
+	{
+		System.out.println(pInfo);
+	}
+	private static void evaluateConsoleInput(String pInput)
+	{
+		switch(pInput)
+		{
+		case "help":
+			writeConsole("get lost");
+            break;
+        //ToDo: Befehl zerlegen und weitergeben an den Service
+        default:
+        	break;
+		}
 	}
 }
