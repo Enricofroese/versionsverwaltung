@@ -9,3 +9,14 @@ Klassendiagramm in Miro:
 https://miro.com/welcomeonboard/Ujl2TmlTa1I5azBJNENpZHpzWE9DZG5tNUVXRjhvMzlXQklEcUdZdEY1R0p2WVk5MFFzb0RUcWpjMURZNjJJYnwzNDU4NzY0NTIyODM2MjgwMDc0fDI=?share_link_id=324145310368
 
 ![image](https://user-images.githubusercontent.com/83819816/211026714-b1a4b8c0-4c0a-4dde-9c76-680a94e0b9e7.png)
+
+Was muss also drin vorkommen?
+* tagging
+* build-werkzeuge --> Maven
+* logging
+* tests
+	  * junit
+	  * code-coverage
+	  * checkstyle
+* refactoring
+* interface ?
