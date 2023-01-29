@@ -4,7 +4,7 @@ package de.fie_fro.versionsverwaltung;
  * Hello world!
  *
  */
-public class App 
+public class Service 
 {
     public static void main( String[] args )
     {
