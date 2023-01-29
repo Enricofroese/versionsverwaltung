@@ -47,6 +47,7 @@ public class consoleScanner {
             break;
         //ToDo: Befehl zerlegen und weitergeben an den Service
         //newf, edit, upld, view (+view old --> 2 param), vhis, setv, comp
+            
         default:
         	break;
 		}
