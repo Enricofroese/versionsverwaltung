@@ -17,7 +17,7 @@ public class FileHandler {
 	private String repository;
 	
 	public FileHandler(String repo) {
-		this.repository = reporoot+repo;
+		this.repository = reporoot+repo+"\\";
 	}
 	
 	public boolean setCurrentFile(String filename) {
@@ -32,9 +32,13 @@ public class FileHandler {
 		return false;
 	}
 	
-	public void setLockOnFile(boolean lock)
-	{
-		currentFile.setEditable(lock);
+	
+	public void lock() {
+		this.currentFile.setEditable(false);
+	}
+	
+	public void unlock() {
+		this.currentFile.setEditable(true);
 	}
 	
 	public File getFile() {
@@ -117,17 +121,25 @@ public class FileHandler {
 		
 	}
 	
+	public String[] getFilesInRepo() {
+		return getFolderContent(new File(repository));
+	}
+	
 	public static void setReporoot(String pReporoot) {
 		reporoot = pReporoot;
 	}
 	
 	public static String[] getRepositories() {
-		File file = new File(FileHandler.reporoot);
-        return file.list(new FilenameFilter() {
-        		public boolean accept(File dir, String name) {
-                return new File(dir, name).isDirectory();
-            }
-        });
+		return getFolderContent(new File(FileHandler.reporoot));
+        
+	}
+	
+	private static String[] getFolderContent(File pFile) {
+		return pFile.list(new FilenameFilter() {
+    		public boolean accept(File dir, String name) {
+            return new File(dir, name).isDirectory();
+        }
+    });
 	}
 
 	public static void main(String[] args) {

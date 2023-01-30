@@ -1,7 +1,11 @@
 package de.fie_fro.versionsverwaltung;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+
+import javax.swing.JFileChooser;
 
 public class consoleScanner {
 	
@@ -41,7 +45,7 @@ public class consoleScanner {
 		else {
 			//--> log System.out.println("Gewähltes Repository: "+repo);
 			service = new Service(repo);
-			
+			writeConsole("OK");
 			//ab hier beginnt die eigentliche Interaktion mit der Konsole
 			readConsole();
 		}
@@ -72,6 +76,16 @@ public class consoleScanner {
 	{
 		String input[] = pInput.split(" ");
 		//writeConsole(input[0]);
+		//weil ich kein Lust habe die Pfade einzutippen
+		String[] appliable = {"newf","view","upld"};
+		if (input.length == 1&&Arrays.asList(appliable).contains(input[0])) {
+			String temp = input[0];
+			input = new String[2];
+			input[0] = temp;
+			JFileChooser j = new JFileChooser();
+			j.showOpenDialog(null);
+			input[1] = j.getSelectedFile().getAbsolutePath();
+		}
 		switch(input[0])
 		{
 		case "help":
@@ -109,14 +123,6 @@ public class consoleScanner {
 				e.printStackTrace();
 			}
 			break;
-		case "setv":
-			try {
-				writeConsole(service.setFileVersionToHead(input[1], input[2]));
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-			}
-			break;
 		case "vhis":
 			try {
 				service.getFileVersionHistory(input[1]);
@@ -142,6 +148,15 @@ public class consoleScanner {
 				e.printStackTrace();
 			}
 			break;
+		case "ls":
+			try {
+				for (String s : service.getRepoContent()){ 
+					writeConsole(s);
+				}
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}
         default:
         	break;
 		}

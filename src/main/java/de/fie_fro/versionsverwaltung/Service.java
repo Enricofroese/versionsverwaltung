@@ -1,9 +1,14 @@
 package de.fie_fro.versionsverwaltung;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import javax.swing.JFileChooser;
 
 /**
  * Hello world!
@@ -18,14 +23,14 @@ public class Service
         String date = dateFormat.format(new Date());
  
         id = Integer.valueOf(date);
-        fileHandler = new FileHandler(pRepo+"\\");
+        fileHandler = new FileHandler(pRepo);
 	}
 	
 	public void compare(String pFilename1, String pFilename2) {
 		fileHandler.setCurrentFile(pFilename1);
-		//Datei file1 = fileHandler.getFile();
+		File file1 = fileHandler.getFile();
 		fileHandler.setCurrentFile(pFilename2);
-		//Datei file2 = fileHandler.getFile();
+		File file2 = fileHandler.getFile();
 		System.out.println("Vergleiche Dateien "+pFilename1+" und "+pFilename2+":");
 		//TODO Vergleichen
 	}
@@ -33,8 +38,17 @@ public class Service
 	public void editFile(String pFilename) {
 		System.out.println("Bearbeite Datei "+pFilename);
 		fileHandler.setCurrentFile(pFilename);
-		fileHandler.setLockOnFile(true); //Annahme true = locked?
-		//TODO Methode im FileHandler zum Editieren
+		fileHandler.lock();//Annahme true = locked?
+		JFileChooser fileChooser = new JFileChooser();
+	    int returnValue = fileChooser.showSaveDialog(null);
+	    if (returnValue == JFileChooser.APPROVE_OPTION) {
+	        File selectedFile = fileChooser.getSelectedFile();
+	        try {
+	            Files.copy(fileHandler.getFile().toPath(), selectedFile.toPath());
+	        } catch (IOException e) {
+	            e.printStackTrace();
+	        }
+	    }
 	}
 	
 	public String uploadNewFile(String pPathToFile) {
@@ -42,14 +56,7 @@ public class Service
 		fileHandler.uploadNewFile(newFile);
 		return "Hochladen erfolgreich";
 	}
-	
-	public String setFileVersionToHead(String pFilename, String pVersion) {
-		int version = Integer.valueOf(pVersion);
-		fileHandler.setCurrentFile(pFilename);
-		// TODO Auto-generated method stub
-		return "";
-	}
-	
+		
 	public Integer[] getFileVersionHistory(String pFilename) {
 		// TODO Auto-generated method stub
 		fileHandler.setCurrentFile(pFilename);
@@ -65,6 +72,11 @@ public class Service
 	public String uploadExistingFileWithNewVersion(String pPathToFile) {
 		File existingFile = new File(pPathToFile);
 		fileHandler.uploadNewVersion(existingFile);
-		return "Hochgeladen erfolgreich";
+		fileHandler.unlock();
+		return "Hochladen erfolgreich";
+	}
+	
+	public String[] getRepoContent() {
+		return fileHandler.getFilesInRepo();
 	}
 }
