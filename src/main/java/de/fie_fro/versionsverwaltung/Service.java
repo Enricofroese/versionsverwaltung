@@ -1,5 +1,6 @@
 package de.fie_fro.versionsverwaltung;
 
+import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,8 +22,12 @@ public class Service
 	}
 	
 	public void compare(String pFilename1, String pFilename2) {
+		fileHandler.setCurrentFile(pFilename1);
+		//Datei file1 = fileHandler.getFile();
+		fileHandler.setCurrentFile(pFilename2);
+		//Datei file2 = fileHandler.getFile();
 		System.out.println("Vergleiche Dateien "+pFilename1+" und "+pFilename2+":");
-		//TODO Methode im FileHandler zum Vergleichen
+		//TODO Vergleichen
 	}
 	
 	public void editFile(String pFilename) {
@@ -33,34 +38,33 @@ public class Service
 	}
 	
 	public String uploadNewFile(String pPathToFile) {
-		//TODO aus dem Pfad eine Datei machen
-		fileHandler.uploadNewFile(null);
+		Datei newFile = new Datei(pPathToFile);
+		fileHandler.uploadNewFile(newFile);
 		return "Hochladen erfolgreich";
 	}
 	
 	public String setFileVersionToHead(String pFilename, String pVersion) {
 		int version = Integer.valueOf(pVersion);
-		System.out.println("Version: "+version);
+		fileHandler.setCurrentFile(pFilename);
 		// TODO Auto-generated method stub
 		return "";
 	}
 	
 	public Integer[] getFileVersionHistory(String pFilename) {
 		// TODO Auto-generated method stub
-		//getVersions
 		fileHandler.setCurrentFile(pFilename);
 		return fileHandler.getVersions();
 	}
 	
 	public void viewFile(String pFilename) {
-		// TODO Auto-generated method stub
-		
+		fileHandler.setCurrentFile(pFilename);
+		fileHandler.getFile();
+		// TODO Datei anzeigen
 	}
 	
 	public String uploadExistingFileWithNewVersion(String pPathToFile) {
-		// TODO Auto-generated method stub
-		String dateiname = "";
-		int version = 0;
-		return "Datei \""+dateiname+"\" wurde erfolgreich hochgeladen (Version "+version+").";
+		Datei existingFile = new Datei(pPathToFile);
+		fileHandler.uploadNewVersion(existingFile);
+		return "Hochgeladen erfolgreich";
 	}
 }
