@@ -38,7 +38,7 @@ public class Service
 	}
 	
 	public String uploadNewFile(String pPathToFile) {
-		Datei newFile = new Datei(pPathToFile);
+		File newFile = new File(pPathToFile);
 		fileHandler.uploadNewFile(newFile);
 		return "Hochladen erfolgreich";
 	}
@@ -63,7 +63,7 @@ public class Service
 	}
 	
 	public String uploadExistingFileWithNewVersion(String pPathToFile) {
-		Datei existingFile = new Datei(pPathToFile);
+		File existingFile = new File(pPathToFile);
 		fileHandler.uploadNewVersion(existingFile);
 		return "Hochgeladen erfolgreich";
 	}
