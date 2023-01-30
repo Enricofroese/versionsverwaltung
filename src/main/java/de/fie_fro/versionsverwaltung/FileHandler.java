@@ -3,6 +3,7 @@ package de.fie_fro.versionsverwaltung;
 import java.io.File;
 //import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Properties;
@@ -10,7 +11,7 @@ import java.util.Properties;
 
 public class FileHandler {
 	
-	public static String reporoot;
+	public static String reporoot = "C:\\repos\\";
 
 	private Datei currentFile;
 	private String repository;
@@ -118,6 +119,15 @@ public class FileHandler {
 	
 	public static void setReporoot(String pReporoot) {
 		reporoot = pReporoot;
+	}
+	
+	public static String[] getRepositories() {
+		File file = new File(FileHandler.reporoot);
+        return file.list(new FilenameFilter() {
+        		public boolean accept(File dir, String name) {
+                return new File(dir, name).isDirectory();
+            }
+        });
 	}
 
 	public static void main(String[] args) {
