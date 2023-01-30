@@ -3,7 +3,7 @@ package de.fie_fro.versionsverwaltung;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
+//import java.nio.file.StandardCopyOption;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -31,7 +31,7 @@ public class Service
 		File file1 = fileHandler.getFile();
 		fileHandler.setCurrentFile(pFilename2);
 		File file2 = fileHandler.getFile();
-		System.out.println("Vergleiche Dateien "+pFilename1+" und "+pFilename2+":");
+		System.out.println("Vergleiche Dateien "+file1.getName()+" und "+file2.getName()+":");
 		//TODO Vergleichen
 	}
 	
@@ -58,7 +58,6 @@ public class Service
 	}
 		
 	public Integer[] getFileVersionHistory(String pFilename) {
-		// TODO Auto-generated method stub
 		fileHandler.setCurrentFile(pFilename);
 		return fileHandler.getVersions();
 	}
