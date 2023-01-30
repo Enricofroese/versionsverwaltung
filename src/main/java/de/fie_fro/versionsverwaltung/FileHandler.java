@@ -1,19 +1,19 @@
 package de.fie_fro.versionsverwaltung;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+//import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Properties;
-import java.util.Scanner;
+//import java.util.Scanner;
 
 public class FileHandler {
 	
-	public static String reporoot = "C:\\repos\\";
+	public static String reporoot;
 
 	private Datei currentFile;
-	private String	repository;
+	private String repository;
 	
 	public FileHandler(String repo) {
 		this.repository = reporoot+repo;
@@ -47,6 +47,7 @@ public class FileHandler {
 	public void uploadNewFile(File file) {
 		uploadNewFile(file, file.getName().replaceAll("[.][^.]+$", ""));
 	}
+	
 	//Creates new directory with the name. The File itself becomes namev1
 	public void uploadNewFile(File file, String pName) 
 	{
@@ -86,12 +87,14 @@ public class FileHandler {
 		}
 		
 	}
+	
 	public boolean doesFileExist(String filename) {
 		
 		File temp = new File(repository + filename);
 		System.out.println(repository + filename);
 		return temp.exists();
 	}
+	
 	private boolean doesVersionExist(int version) {
 		Integer[] arr = getVersions();
 		for(int i = 0; i<arr.length;i++) {
@@ -113,6 +116,10 @@ public class FileHandler {
 		
 	}
 	
+	public static void setReporoot(String pReporoot) {
+		reporoot = pReporoot;
+	}
+
 	public static void main(String[] args) {
 		FileHandler f = new FileHandler("testrepo\\");
 		f.setCurrentFile("testdatei");

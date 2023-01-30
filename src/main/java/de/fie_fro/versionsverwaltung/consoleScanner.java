@@ -9,15 +9,18 @@ public class consoleScanner {
 	
 	private static Service service;
 	private static Scanner scanner = new Scanner(System.in);
+	private static String reporoot = "C:\\repos\\";
 	private String repo;
 	
 	
 	public static void main(String[] args) {
+		FileHandler.setReporoot(reporoot);
 		new consoleScanner();
 	}
 	
 	public consoleScanner() {
-		File file = new File("C:\\repos\\");
+		
+		File file = new File(reporoot);
         String[] directories = file.list(new FilenameFilter() {
             public boolean accept(File dir, String name) {
                 return new File(dir, name).isDirectory();

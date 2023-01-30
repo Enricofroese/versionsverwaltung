@@ -22,17 +22,20 @@ public class Service
 	
 	public void compare(String pFilename1, String pFilename2) {
 		System.out.println("Vergleiche Dateien "+pFilename1+" und "+pFilename2+":");
+		//TODO Methode im FileHandler zum Vergleichen
 	}
 	
 	public void editFile(String pFilename) {
 		System.out.println("Bearbeite Datei "+pFilename);
+		fileHandler.setCurrentFile(pFilename);
+		fileHandler.setLockOnFile(true); //Annahme true = locked?
+		//TODO Methode im FileHandler zum Editieren
 	}
 	
 	public String uploadNewFile(String pPathToFile) {
-		// TODO Auto-generated method stub
-		String dateiname = "";
-		int version = 0;
-		return "Neue Datei \""+dateiname+"\" wurde erfolgreich hochgeladen (Version "+version+").";
+		//TODO aus dem Pfad eine Datei machen
+		fileHandler.uploadNewFile(null);
+		return "Hochladen erfolgreich";
 	}
 	
 	public String setFileVersionToHead(String pFilename, String pVersion) {
@@ -47,7 +50,6 @@ public class Service
 		//getVersions
 		fileHandler.setCurrentFile(pFilename);
 		return fileHandler.getVersions();
-		
 	}
 	
 	public void viewFile(String pFilename) {
