@@ -4,7 +4,14 @@ import java.util.Scanner;
 
 public class consoleScanner {
 	
+	private static Service service;
+	
+	public consoleScanner() {
+		service = new Service();
+	}
+	
 	public static void main(String[] args) {
+		new consoleScanner();
 		readConsole();
 	}
 	
@@ -45,8 +52,22 @@ public class consoleScanner {
 					+ "upld\tDatei hochladen (Parameter: Dateiname)\n\n"
 					+ "Beispiel: edit MyApp.java");
             break;
-        //ToDo: Befehl zerlegen und weitergeben an den Service
-        //newf, edit, upld, view (+view old --> 2 param), vhis, setv, comp
+		case "comp":
+			service.compare(input[1], input[2]);
+			//vorher abfangen, wie viele Parameter gesetzt sind
+			break;
+		case "edit":
+			break;
+		case "newf":
+			break;
+		case "setv":
+			break;
+		case "vhis":
+			break;
+		case "view":
+			break;
+		case "upld":
+			break;
         default:
         	break;
 		}

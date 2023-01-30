@@ -6,8 +6,11 @@ package de.fie_fro.versionsverwaltung;
  */
 public class Service 
 {
-    public static void main( String[] args )
+	public void main( String[] args )
     {
         System.out.println( "Hello World" );
     }
+	public void compare(String pFilename1, String pFilename2) {
+		System.out.println(pFilename1 + " und " + pFilename2);
+	}
 }
