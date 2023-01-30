@@ -1,23 +1,60 @@
 package de.fie_fro.versionsverwaltung;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.util.Arrays;
 import java.util.Scanner;
-//import java.io.
 
 public class consoleScanner {
 	
 	private static Service service;
+	private static Scanner scanner = new Scanner(System.in);
+	private String repo;
 	
-	public consoleScanner() {
-		service = new Service();
-	}
 	
 	public static void main(String[] args) {
 		new consoleScanner();
-		readConsole();
+	}
+	
+	public consoleScanner() {
+		File file = new File("C:\\repos\\");
+        String[] directories = file.list(new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                return new File(dir, name).isDirectory();
+            }
+        });
+ 
+		System.out.println("Folgende Repositories sind vorhanden: "
+				+Arrays.toString(directories)+
+				"\nBitte Repository eingeben:");
+		
+		while(true) {
+			repo = scanner.nextLine();
+			if(!repo.equals("")) {
+				break;
+			}
+		}
+		boolean vorhanden = false;
+		for(int i=0; i < directories.length; i++){
+		    if(directories[i].equals(repo)){
+		         vorhanden = true;
+		    }
+		}
+		if (!vorhanden) {
+			System.out.println("Das Repository ist nicht vorhanden, die Console wird geschlossen.");
+			scanner.close();
+		}
+		else {
+			//--> log System.out.println("Gewähltes Repository: "+repo);
+			service = new Service(repo);
+			
+			//ab hier beginnt die eigentliche Interaktion mit der Konsole
+			readConsole();
+		}
 	}
 	
 	private static void readConsole() {
-		Scanner scanner = new Scanner(System.in);
+		//Scanner scanner = new Scanner(System.in); //refactored
 		String input = "";
 		while(true) 
 		{
@@ -25,7 +62,7 @@ public class consoleScanner {
 			evaluateConsoleInput(input);
 			if(input.equals("exit")) 
 			{
-				writeConsole("Console wird geschlossen");
+				writeConsole("Die Console wird geschlossen.");
 				break;
 			}
 		}
@@ -53,9 +90,7 @@ public class consoleScanner {
 					+ "\tDatei der Version n anzeigen (Parameter: Dateiname Version)\n"
 					+ "upld\tDatei hochladen (Parameter: Pfad zur Datei)\n\n"
 					+ "Beispiel: edit MyApp.java");
-			//evtl. newf und upld zusammenlegen und dann im Service unterscheiden, 
-			//ob neue Datei oder neue Version
-            break;
+			break;
 		case "comp":
 			try {
 				service.compare(input[1], input[2]);

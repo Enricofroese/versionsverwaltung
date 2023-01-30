@@ -10,12 +10,14 @@ import java.util.Date;
  */
 public class Service 
 {
-	int id;
-	public Service() {
+	int id; //fürs logging nachher
+	FileHandler fileHandler;
+	public Service(String pRepo) {
 		DateFormat dateFormat = new SimpleDateFormat("ddHHmmss");
         String date = dateFormat.format(new Date());
  
         id = Integer.valueOf(date);
+        fileHandler = new FileHandler(pRepo+"\\");
 	}
 	
 	public void compare(String pFilename1, String pFilename2) {
@@ -40,8 +42,11 @@ public class Service
 		return "";
 	}
 	
-	public void getFileVersionHistory(String pFilename) {
+	public Integer[] getFileVersionHistory(String pFilename) {
 		// TODO Auto-generated method stub
+		//getVersions
+		fileHandler.setCurrentFile(pFilename);
+		return fileHandler.getVersions();
 		
 	}
 	
