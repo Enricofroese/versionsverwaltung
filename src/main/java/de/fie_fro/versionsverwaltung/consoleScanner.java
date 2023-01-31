@@ -33,6 +33,7 @@ public class consoleScanner {
 		}
 		logger.info("Logger \""+logger.getName()+"\" wurde initialisiert.");
 	}
+	
 	public consoleScanner() {
 		
 		String[] directories = FileHandler.getRepositories();
@@ -147,6 +148,17 @@ public class consoleScanner {
 		case "newf":
 			try {
 				writeConsole(service.uploadNewFile(input[1]));
+				logger.info("Die Funktion "+input[0]+" war erfolgreich.");
+			}
+			catch(Exception e) {
+				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion "+input[0]+" aufgetreten:"
+						+e);
+				e.printStackTrace();
+			}
+			break;
+		case "setv":
+			try {
+				service.setFileBackToVersion(input[1], input[2]);
 				logger.info("Die Funktion "+input[0]+" war erfolgreich.");
 			}
 			catch(Exception e) {

@@ -57,7 +57,11 @@ public class Service
 		fileHandler.uploadNewFile(newFile);
 		return "Hochladen erfolgreich";
 	}
-		
+	
+	public void setFileBackToVersion(String pFilename, String pVersion) {
+		//TODO
+	}
+	
 	public Integer[] getFileVersionHistory(String pFilename) {
 		fileHandler.setCurrentFile(pFilename);
 		return fileHandler.getVersions();
