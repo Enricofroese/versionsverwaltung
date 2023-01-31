@@ -49,6 +49,7 @@ public class Service
 	            e.printStackTrace();
 	        }
 	    }
+	    //TODO klappt noch nicht
 	}
 	
 	public String uploadNewFile(String pPathToFile) {
@@ -70,10 +71,11 @@ public class Service
 	
 	public String uploadExistingFileWithNewVersion(String pPathToFile) {
 		File existingFile = new File(pPathToFile);
-		String filename[] = existingFile.getName().split(".");
+		String filename = existingFile.getName();
+		String filenameWithouteExtension = filename.substring(0, filename.lastIndexOf('.'));
 		try {
-			//fileHandler.setCurrentFile(filename[0]);
-			System.out.println(existingFile.getName());
+			fileHandler.setCurrentFile(filenameWithouteExtension);
+			// log System.out.println(filenameWithouteExtension);
 		}
 		catch(Exception e) {
 			e.printStackTrace();

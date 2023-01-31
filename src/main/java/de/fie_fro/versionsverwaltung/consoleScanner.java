@@ -1,8 +1,8 @@
 package de.fie_fro.versionsverwaltung;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+//import java.util.List;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
@@ -11,7 +11,7 @@ public class consoleScanner {
 	
 	private static Service service;
 	private static Scanner scanner = new Scanner(System.in);
-	//private static String reporoot = "C:\\repos\\"; gehört in FileHandler
+	//private static String reporoot = "C:\\repos\\"; gehört in FileHandler --> refactored
 	private String repo;
 	
 	
@@ -126,8 +126,16 @@ public class consoleScanner {
 			break;
 		case "vhis":
 			try {
-				service.getFileVersionHistory(input[1]);
-				//TODO Versionshistorie ausgeben
+				Integer[] history = service.getFileVersionHistory(input[1]);
+				for(int i = 0; i<history.length;i++) {
+					if(i==history.length-1) {
+						writeConsole("aktuelle Version: "+history[i].toString());
+
+					}
+					else {
+						writeConsole("alte Version: "+history[i].toString());
+					}
+				}
 			}
 			catch(Exception e) {
 				e.printStackTrace();

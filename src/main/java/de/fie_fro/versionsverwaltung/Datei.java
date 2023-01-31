@@ -9,13 +9,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.List;
+//import java.util.List;
 import java.util.Properties;
-import java.util.Scanner;
-
-import javax.swing.filechooser.FileNameExtensionFilter;
+//import java.util.Scanner;
+//import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Datei extends File{
+	private static final long serialVersionUID = 1L;
 	private Properties props;
 	private boolean editable;
 	private int currentversion;
@@ -87,7 +87,7 @@ public class Datei extends File{
 			
 			String version = file[i].getName();
 			//funktioniert nicht bei Dateiendungen mit v 			
-			version = version.substring(version.lastIndexOf("v"),version.lastIndexOf("."));
+			version = version.substring(version.lastIndexOf("v")+1,version.lastIndexOf("."));
 			
 			namen.add(Integer.parseInt(version));
 		}
