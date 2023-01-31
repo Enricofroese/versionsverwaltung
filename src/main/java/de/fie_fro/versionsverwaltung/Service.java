@@ -70,7 +70,14 @@ public class Service
 	
 	public String uploadExistingFileWithNewVersion(String pPathToFile) {
 		File existingFile = new File(pPathToFile);
-		fileHandler.setCurrentFile(existingFile.getName());
+		String filename[] = existingFile.getName().split(".");
+		try {
+			//fileHandler.setCurrentFile(filename[0]);
+			System.out.println(existingFile.getName());
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		fileHandler.uploadNewVersion(existingFile);
 		fileHandler.unlock();
 		return "Hochladen erfolgreich";
