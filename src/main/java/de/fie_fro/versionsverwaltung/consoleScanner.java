@@ -91,6 +91,7 @@ public class consoleScanner {
 		case "help":
 			writeConsole("comp\t2 Dateien vergleichen(Parameter: Dateiname Dateiname)\n"
 					+ "edit\tDatei bearbeiten (Parameter: Dateiname)\n"
+					+ "ls\tListet alle Dateien im aktuellen Repository auf\n"
 					+ "newf\tNeue Datei erstellen (Parameter: Pfad zur Datei)\n"
 					+ "setv\tVersion als aktuell setzen (Parameter: Dateiname Version)\n"
 					+ "vhis\tVersionshistorie anzeigen (Parameter: Dateiname)\n"

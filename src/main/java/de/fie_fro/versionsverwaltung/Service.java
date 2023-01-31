@@ -38,7 +38,7 @@ public class Service
 	public void editFile(String pFilename) {
 		System.out.println("Bearbeite Datei "+pFilename);
 		fileHandler.setCurrentFile(pFilename);
-		fileHandler.lock();//Annahme true = locked?
+		fileHandler.lock();
 		JFileChooser fileChooser = new JFileChooser();
 	    int returnValue = fileChooser.showSaveDialog(null);
 	    if (returnValue == JFileChooser.APPROVE_OPTION) {
