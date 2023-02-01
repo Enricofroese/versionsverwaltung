@@ -157,7 +157,7 @@ public class FileHandler {
 	
 	public File getOldFile(int version) {
 		if(doesVersionExist(version)) {
-			logger.severe("Die Version "+version+" der Datei "+currentFile.getName()+"existiert.");
+			logger.info("Die Version "+version+" der Datei "+currentFile.getName()+" existiert.");
 			return new File(this.currentFile.getAbsolutePath() + "\\" + this.currentFile.getName() + "v" + version+ ".txt");
 		}
 		logger.severe("Die Version "+version+" der Datei "+currentFile.getName()+"existiert nicht.");
