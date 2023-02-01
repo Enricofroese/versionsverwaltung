@@ -33,7 +33,7 @@ public class consoleScanner {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		logger.info("Logger \""+logger.getName()+"\" wurde initialisiert.");
+		logger.info("Logger \"" + logger.getName() + "\" wurde initialisiert.");
 	}
 	
 	public consoleScanner() {
@@ -46,7 +46,7 @@ public class consoleScanner {
 		while(true) {
 			repo = scanner.nextLine();
 			if(!repo.equals("")) {
-				logger.info("Gewähltes Repository ist: "+repo+".");
+				logger.info("Gewähltes Repository ist: " + repo + ".");
 				break;
 			}
 		}
@@ -54,12 +54,12 @@ public class consoleScanner {
 		for(int i=0; i < directories.length; i++){
 		    if(directories[i].equals(repo)){
 		         vorhanden = true;
-		         logger.info("Repository "+repo+" gefunden.");
+		         logger.info("Repository " + repo + " gefunden.");
 		    }
 		}
 		if (!vorhanden) {
 			writeConsole("Das Repository ist nicht vorhanden, die Console wird geschlossen.");
-			logger.info("Das Repository "+repo+" ist nicht vorhanden.");
+			logger.info("Das Repository " + repo + " ist nicht vorhanden.");
 			scanner.close();
 		}
 		else {
@@ -77,22 +77,22 @@ public class consoleScanner {
 		while(true) 
 		{
 			input = scanner.nextLine();
-			logger.info("Eingegebener Befehl: "+input);
+			logger.info("Eingegebener Befehl: " + input);
 			if(input.equals("exit")) 
 			{
 				writeConsole("Die Console wird geschlossen.");
 				logger.info("Die Console wird geschlossen.");
+				scanner.close();
 				break;
 			}
 			evaluateConsoleInput(input);
 		}
-		scanner.close();
 	}
 	
 	private static void writeConsole(String pInfo) //eigentlich obsolet
 	{
 		System.out.println(pInfo);
-		logger.finest("Folgende Information wird in die Console geschrieben: "+pInfo);
+		logger.finest("Folgende Information wird in die Console geschrieben: " + pInfo);
 	}
 	
 	private static void evaluateConsoleInput(String pInput)
@@ -100,32 +100,33 @@ public class consoleScanner {
 		//Kein Space in Dateinamen erlaubt
 		String input[] = pInput.split(" ");
 		for(int i=0;i<input.length;i++) {
-			logger.finer("Teil "+i+" der Eingabe: "+input[i]);
+			logger.finer("Teil " + i + " der Eingabe: " + input[i]);
 		}
 		
 		switch(input[0])
 		{
 		case "help":
-			writeConsole("comp\t2 Dateien vergleichen(Parameter: Dateiname version version)\n"
+			writeConsole("comp\t2 Dateien vergleichen(Parameter: Dateiname Version1 Version2)\n"
 					+ "edit\tDatei bearbeiten (Parameter: Dateiname)\n"
 					+ "ls\tListet alle Dateien im aktuellen Repository auf\n"
-					+ "newf\tNeue Datei erstellen (Parameter: Pfad zur Datei)\n"
+					+ "newf\tNeue Datei erstellen (Parameter: PfadZurDatei)\n"
 					+ "setv\tVersion als aktuell setzen (Parameter: Dateiname Version)\n"
 					+ "vhis\tVersionshistorie anzeigen (Parameter: Dateiname)\n"
 					+ "view\tDatei anzeigen (Parameter: Dateiname)\n"
 					+ "\tDatei der Version n anzeigen (Parameter: Dateiname Version)\n"
-					+ "upld\tDatei hochladen (Parameter: Dateinam Pfad zur Datei)\n\n"
+					+ "upld\tDatei hochladen (Parameter: Dateiname PfadZurDatei)\n\n"
 					+ "Beispiel:\tedit MyApp\n"
-					+ "Beispiel2:\tview App2\n\n"
-					+ "Dateinamen immer ohne Endung angeben, Pfade mit Dateinamen+Endung");
+					+ "Beispiel2:\tview App2\n"
+					+ "Beispiel3:\tcomp text 3 5\n\n"
+					+ "Hinweis: Dateinamen immer ohne Endung angeben, Pfade mit Dateinamen+Endung");
 			break;
 		case "comp":
 			try {
 				service.compare(input[1], input[2], input[3]);
-				logger.info("Die Funktion "+input[0]+" war erfolgreich.");
+				logger.info("Die Funktion " + input[0] + " war erfolgreich.");
 			}
 			catch(Exception e) {
-				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion "+input[0]+" aufgetreten:"
+				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion " + input[0] + " aufgetreten:"
 						+e);
 				e.printStackTrace();
 			}
@@ -133,10 +134,10 @@ public class consoleScanner {
 		case "edit":
 			try {
 				service.editFile(input[1]);
-				logger.info("Die Funktion "+input[0]+" war erfolgreich.");
+				logger.info("Die Funktion " + input[0] + " war erfolgreich.");
 			}
 			catch(Exception e) {
-				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion "+input[0]+" aufgetreten:"
+				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion " + input[0] + " aufgetreten:"
 						+e);
 				e.printStackTrace();
 			}
@@ -144,10 +145,10 @@ public class consoleScanner {
 		case "newf":
 			try {
 				writeConsole(service.uploadNewFile(input[1]));
-				logger.info("Die Funktion "+input[0]+" war erfolgreich.");
+				logger.info("Die Funktion " + input[0] + " war erfolgreich.");
 			}
 			catch(Exception e) {
-				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion "+input[0]+" aufgetreten:"
+				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion " + input[0] + " aufgetreten:"
 						+e);
 				e.printStackTrace();
 			}
@@ -155,10 +156,10 @@ public class consoleScanner {
 		case "setv":
 			try {
 				service.setFileBackToVersion(input[1], input[2]);
-				logger.info("Die Funktion "+input[0]+" war erfolgreich.");
+				logger.info("Die Funktion " + input[0] + " war erfolgreich.");
 			}
 			catch(Exception e) {
-				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion "+input[0]+" aufgetreten:"
+				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion " + input[0] + " aufgetreten:"
 						+e);
 				e.printStackTrace();
 			}
@@ -168,17 +169,17 @@ public class consoleScanner {
 				Integer[] history = service.getFileVersionHistory(input[1]);
 				for(int i = 0; i<history.length;i++) {
 					if(i==history.length-1) {
-						writeConsole("aktuelle Version: "+history[i].toString());
+						writeConsole("davon aktuelle Version: " + history[i].toString());
 
 					}
 					else {
-						writeConsole("alte Version: "+history[i].toString());
+						writeConsole("Version: " + history[i].toString());
 					}
 				}
-				logger.info("Die Funktion "+input[0]+" war erfolgreich.");
+				logger.info("Die Funktion " + input[0] + " war erfolgreich.");
 			}
 			catch(Exception e) {
-				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion "+input[0]+" aufgetreten:"
+				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion " + input[0] + " aufgetreten:"
 						+e);
 				e.printStackTrace();
 			}
@@ -186,22 +187,22 @@ public class consoleScanner {
 		case "view":
 			if(input.length<3) {
 				try {
-					logger.info("Die Funktion "+input[0]+" war erfolgreich.");
+					logger.info("Die Funktion " + input[0] + " war erfolgreich.");
 					service.viewFile(input[1]);
 				}
 				catch(Exception e) {
-					logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion "+input[0]+" aufgetreten:"
+					logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion " + input[0] + " aufgetreten:"
 							+e);
 					e.printStackTrace();
 				}
 			}
 			else {
 				try {
-					logger.info("Die Funktion "+input[0]+" war erfolgreich.");
+					logger.info("Die Funktion " + input[0] + " war erfolgreich.");
 					service.viewFileOfVersion(input[1], input[2]);
 				}
 				catch(Exception e) {
-					logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion "+input[0]+" aufgetreten:"
+					logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion " + input[0] + " aufgetreten:"
 							+e);
 					e.printStackTrace();
 				}
@@ -210,10 +211,10 @@ public class consoleScanner {
 		case "upld":
 			try {
 				writeConsole(service.uploadNewVersion(input[1], input[2]));
-				logger.info("Die Funktion "+input[0]+" war erfolgreich.");
+				logger.info("Die Funktion " + input[0] + " war erfolgreich.");
 			}
 			catch(Exception e) {
-				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion "+input[0]+" aufgetreten:"
+				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion " + input[0] + " aufgetreten:"
 						+e);
 				e.printStackTrace();
 			}
@@ -222,23 +223,23 @@ public class consoleScanner {
 			try {
 				for (String s : service.getRepoContent()){ 
 					writeConsole(s);
-					logger.fine("Die Datei "+s+" wurde im aktuellen Repository gefunden.");
+					logger.fine("Die Datei " + s + " wurde im aktuellen Repository gefunden.");
 				}
-				logger.info("Die Funktion "+input[0]+" war erfolgreich.");
+				logger.info("Die Funktion " + input[0] + " war erfolgreich.");
 			}
 			catch(Exception e) {
-				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion "+input[0]+" aufgetreten:"
+				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion " + input[0] + " aufgetreten:"
 						+e);
 				e.printStackTrace();
 			}
 			break;
         default:
-        	logger.warning("Für die eingegebene Funktion "+input[0]+" ist keine Aktion definiert.");
+        	logger.warning("Für die eingegebene Funktion " + input[0] + " ist keine Aktion definiert.");
         	break;
 		}
 	}
 	public static void fileToConsole(File pDatei) throws Exception{
-		writeConsole(pDatei.getName()+":\n"
+		writeConsole(pDatei.getName() + ":\n"
 				+ "------------------------------------------------------------\n");
 		BufferedReader in = new BufferedReader(new FileReader(pDatei));
         String line = "";

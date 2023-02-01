@@ -57,7 +57,7 @@ public class FileHandler {
 	}
 	
 	public boolean isLocked() {
-		return this.currentFile.isEditable();
+		return !this.currentFile.isEditable();
 	}
 	
 	public void unlock() {
@@ -160,20 +160,20 @@ public class FileHandler {
 			logger.info("Die Version "+version+" der Datei "+currentFile.getName()+" existiert.");
 			return new File(this.currentFile.getAbsolutePath() + "\\" + this.currentFile.getName() + "v" + version+ ".txt");
 		}
-		logger.severe("Die Version "+version+" der Datei "+currentFile.getName()+"existiert nicht.");
+		logger.severe("Die Version "+version+" der Datei "+currentFile.getName()+" existiert nicht.");
 		return null;
 		
 	}
 	
 	public boolean toOldVersion(int version) {
 		if(!doesVersionExist(version)) {
-			logger.severe("Die Version "+version+" der Datei "+currentFile.getName()+"existiert nicht.");
+			logger.severe("Die Version "+version+" der Datei "+currentFile.getName()+" existiert nicht.");
 			return false;
 		}
 		
 		this.currentFile.setCurrentversion(version);
 			
-		logger.severe("Die Version "+version+" der Datei "+currentFile.getName()+"existiert.");		
+		logger.info("Die Version "+version+" der Datei "+currentFile.getName()+" existiert.");		
 		return true;
 		
 	}

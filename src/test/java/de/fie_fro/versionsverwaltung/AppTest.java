@@ -35,7 +35,7 @@ public class AppTest
 	@Test
 	@Order(1)
     @DisplayName("Upload-Neue-Datei")
-    public void testUploadNewFile()
+    public void uploadNewFileTest()
     {
         boolean vorhanden = false;
     	serv.uploadNewFile(".\\src\\test\\v1\\testupload.txt");
@@ -50,7 +50,7 @@ public class AppTest
 	@Test
 	@Order(3)
 	@DisplayName("Upload-Zweite-Dateiversion")
-	public void testUploadNewVersion() {
+	public void uploadNewVersionTest() {
 		boolean vorhanden = false;
     	serv.uploadNewVersion("testupload", ".\\src\\test\\v2\\testupload.txt");
     	Integer[] hist = serv.getFileVersionHistory("testupload");
@@ -65,7 +65,7 @@ public class AppTest
 	@Test
 	@Order(2)
 	@DisplayName("Set-Lock-bei-Edit")
-	public void editFile() {
+	public void editFileTest() {
 		serv.editFile("testupload");
 		//System.out.println(Service.fileHandler.isLocked());
 		assertTrue(Service.fileHandler.isLocked());
@@ -74,8 +74,25 @@ public class AppTest
 	@Test
 	@Order(4)
 	@DisplayName("Lock-entfernt")
-	public void isUnlockedAgain() {
+	public void isUnlockedAgainTest() {
 		Service.fileHandler.setCurrentFile("testupload");
 		assertFalse(Service.fileHandler.isLocked());
+	}
+	
+	@Test
+	@Order(5)
+	@DisplayName("Version-zuruecksetzen")
+	public void setVersionBackTest() {
+		serv.setFileBackToVersion("testupload", "1");
+		assertEquals(1,Service.fileHandler.getVersion());
+	}
+	
+	@Test
+	@Order(6)
+	@DisplayName("Compare-von-Versionen")
+	public void compareVersionsTest() {
+		serv.compare("testupload", "1", "2");
+		//Keine Fehlermeldung ist hier Erfolg, man kann leider keine Consolen-Eingaben "asserten"
+		//In der Console kann man aber das Ergebnis vom Vergleich sehen
 	}
 }
