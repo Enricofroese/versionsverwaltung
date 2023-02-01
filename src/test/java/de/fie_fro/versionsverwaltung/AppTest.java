@@ -60,14 +60,22 @@ public class AppTest
 			}
 		}
     	assertTrue(vorhanden);
-	}
+    }
 	
 	@Test
 	@Order(2)
 	@DisplayName("Set-Lock-bei-Edit")
 	public void editFile() {
 		serv.editFile("testupload");
-		File datei = Service.fileHandler.getFile();
-		//assertThrows( serv.editFile("testupload"));
+		//System.out.println(Service.fileHandler.isLocked());
+		assertTrue(Service.fileHandler.isLocked());
+	}
+	
+	@Test
+	@Order(4)
+	@DisplayName("Lock-entfernt")
+	public void isUnlockedAgain() {
+		Service.fileHandler.setCurrentFile("testupload");
+		assertFalse(Service.fileHandler.isLocked());
 	}
 }
