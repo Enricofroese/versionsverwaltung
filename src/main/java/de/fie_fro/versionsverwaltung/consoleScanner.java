@@ -1,6 +1,9 @@
 package de.fie_fro.versionsverwaltung;
 
+import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 //import java.util.ArrayList;
 import java.util.Arrays;
 //import java.util.List;
@@ -190,9 +193,9 @@ public class consoleScanner {
 			}
 			break;
 		case "view":
-			if(input.length<2) {
+			if(input.length<3) {
 				try {
-					service.viewFile(input[1]);
+					fileToConsole(service.viewFile(input[1]));
 					logger.info("Die Funktion "+input[0]+" war erfolgreich.");
 				}
 				catch(Exception e) {
@@ -203,7 +206,7 @@ public class consoleScanner {
 			}
 			else {
 				try {
-					service.viewFileOfVersion(input[1],input[2]);
+					fileToConsole(service.viewFileOfVersion(input[1],input[2]));
 					logger.info("Die Funktion "+input[0]+" war erfolgreich.");
 				}
 				catch(Exception e) {
@@ -242,5 +245,19 @@ public class consoleScanner {
         	logger.warning("Für die eingegebene Funktion "+input[0]+" ist keine Aktion definiert.");
         	break;
 		}
+	}
+	public static void fileToConsole(File pDatei) throws Exception{
+		writeConsole(pDatei.getName()+":\n"
+				+ "------------------------------------------------------------\n");
+		BufferedReader in = new BufferedReader(new FileReader(pDatei));
+        String line = "";
+        while((line = in.readLine()) != null) {
+	        final StringBuffer output = new StringBuffer();
+	        output.append(line);
+	        logger.fine("Folgende Zeile wird ausgegeben: " + output.toString());
+	        writeConsole(output.toString());
+        }
+        in.close();
+        writeConsole("\n------------------------------------------------------------");
 	}
 }

@@ -22,7 +22,7 @@ import javax.swing.JFileChooser;
  */
 public class Service {
   int id; //fürs logging nachher
-  private static FileHandler fileHandler;
+  public static FileHandler fileHandler;
   private static final Logger logger = Logger.getLogger(consoleScanner.class.getName());
   
   /**.
@@ -134,11 +134,13 @@ public class Service {
    * Datei ansehen
 
    * @param paFilename Dateiname
+   * @return Datei
    */
-  public void viewFile(String paFilename) {
+  public File viewFile(String paFilename) {
     fileHandler.setCurrentFile(paFilename);
-    fileHandler.getFile();
-    // TODO Datei anzeigen
+    File datei = fileHandler.getFile();
+    logger.info("Datei " + datei.getName() + " wird zurückgegeben.");
+    return datei;
   }
 
   /**.
@@ -146,12 +148,14 @@ public class Service {
 
    * @param paFilename Dateiname
    * @param paVersion Version
+   * @return Datei
    */
-  public void viewFileOfVersion(String paFilename, String paVersion) {
+  public File viewFileOfVersion(String paFilename, String paVersion) {
     int version = Integer.valueOf(paVersion);
     fileHandler.setCurrentFile(paFilename);
-    fileHandler.getOldFile(version);
-    //TODO Datei anzeigen
+    File datei = fileHandler.getOldFile(version);
+    logger.info("Datei " + datei.getName() + " wird zurückgegeben.");
+    return datei;
   }
 
   /**.

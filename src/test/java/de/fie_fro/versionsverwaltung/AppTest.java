@@ -48,7 +48,7 @@ public class AppTest
     }
 	
 	@Test
-	@Order(2)
+	@Order(3)
 	@DisplayName("Upload-Zweite-Dateiversion")
 	public void testUploadNewVersion() {
 		boolean vorhanden = false;
@@ -60,5 +60,14 @@ public class AppTest
 			}
 		}
     	assertTrue(vorhanden);
+	}
+	
+	@Test
+	@Order(2)
+	@DisplayName("Set-Lock-bei-Edit")
+	public void editFile() {
+		serv.editFile("testupload");
+		File datei = Service.fileHandler.getFile();
+		//assertThrows( serv.editFile("testupload"));
 	}
 }
