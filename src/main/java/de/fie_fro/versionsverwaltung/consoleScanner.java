@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.util.Arrays;
 //import java.util.List;
 import java.util.Scanner;
+import java.util.logging.ConsoleHandler;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -95,20 +96,12 @@ public class consoleScanner {
 	
 	private static void evaluateConsoleInput(String pInput)
 	{
+		//Kein Space in Dateinamen erlaubt
 		String input[] = pInput.split(" ");
 		for(int i=0;i<input.length;i++) {
 			logger.finer("Teil "+i+" der Eingabe: "+input[i]);
 		}
-		//weil ich kein Lust habe die Pfade einzutippen
-		String[] appliable = {"newf","view","upld"};
-		if (input.length == 1&&Arrays.asList(appliable).contains(input[0])) {
-			String temp = input[0];
-			input = new String[2];
-			input[0] = temp;
-			JFileChooser j = new JFileChooser();
-			j.showOpenDialog(null);
-			input[1] = j.getSelectedFile().getAbsolutePath();
-		}
+		
 		switch(input[0])
 		{
 		case "help":
@@ -190,7 +183,7 @@ public class consoleScanner {
 			}
 			break;
 		case "view":
-			if(input.length<2) {
+			if(input.length<3) {
 				try {
 					service.viewFile(input[1]);
 					logger.info("Die Funktion "+input[0]+" war erfolgreich.");
@@ -215,7 +208,7 @@ public class consoleScanner {
 			break;
 		case "upld":
 			try {
-				writeConsole(service.uploadExistingFileWithNewVersion(input[1]));
+				writeConsole(service.uploadNewVersion(input[1], input[2]));
 				logger.info("Die Funktion "+input[0]+" war erfolgreich.");
 			}
 			catch(Exception e) {

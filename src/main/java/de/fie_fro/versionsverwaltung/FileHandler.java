@@ -56,6 +56,10 @@ public class FileHandler {
 		logger.fine("Die Datei "+currentFile+" wurde gesperrt.");
 	}
 	
+	public boolean isLocked() {
+		return this.currentFile.isEditable();
+	}
+	
 	public void unlock() {
 		this.currentFile.setEditable(true);
 		logger.fine("Die Datei "+currentFile+" wurde entsperrt.");
@@ -160,6 +164,20 @@ public class FileHandler {
 		return null;
 		
 	}
+	
+	public boolean toOldVersion(int version) {
+		if(!doesVersionExist(version)) {
+			logger.severe("Die Version "+version+" der Datei "+currentFile.getName()+"existiert nicht.");
+			return false;
+		}
+		
+		this.currentFile.setCurrentversion(version);
+			
+		logger.severe("Die Version "+version+" der Datei "+currentFile.getName()+"existiert.");		
+		return true;
+		
+	}
+	
 	
 	public String[] getFilesInRepo() {
 		return getFolderContent(new File(repository));
