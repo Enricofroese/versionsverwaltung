@@ -8,10 +8,8 @@ import java.io.FileReader;
 import java.util.Arrays;
 //import java.util.List;
 import java.util.Scanner;
-import java.util.logging.ConsoleHandler;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
 
 
 public class consoleScanner {
@@ -108,7 +106,7 @@ public class consoleScanner {
 		switch(input[0])
 		{
 		case "help":
-			writeConsole("comp\t2 Dateien vergleichen(Parameter: Dateiname Dateiname)\n"
+			writeConsole("comp\t2 Dateien vergleichen(Parameter: Dateiname version version)\n"
 					+ "edit\tDatei bearbeiten (Parameter: Dateiname)\n"
 					+ "ls\tListet alle Dateien im aktuellen Repository auf\n"
 					+ "newf\tNeue Datei erstellen (Parameter: Pfad zur Datei)\n"
@@ -116,14 +114,14 @@ public class consoleScanner {
 					+ "vhis\tVersionshistorie anzeigen (Parameter: Dateiname)\n"
 					+ "view\tDatei anzeigen (Parameter: Dateiname)\n"
 					+ "\tDatei der Version n anzeigen (Parameter: Dateiname Version)\n"
-					+ "upld\tDatei hochladen (Parameter: Pfad zur Datei)\n\n"
+					+ "upld\tDatei hochladen (Parameter: Dateinam Pfad zur Datei)\n\n"
 					+ "Beispiel:\tedit MyApp\n"
-					+ "Beispiel2:\tview App 2\n\n"
+					+ "Beispiel2:\tview App2\n\n"
 					+ "Dateinamen immer ohne Endung angeben, Pfade mit Dateinamen+Endung");
 			break;
 		case "comp":
 			try {
-				service.compare(input[1], input[2]);
+				service.compare(input[1], input[2], input[3]);
 				logger.info("Die Funktion "+input[0]+" war erfolgreich.");
 			}
 			catch(Exception e) {

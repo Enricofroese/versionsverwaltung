@@ -10,7 +10,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 //import java.nio.file.StandardCopyOption;
 import java.util.logging.LogManager;
 import java.util.logging.Logger;
@@ -64,13 +67,57 @@ public class Service {
 	 * @param paFilename1 Dateiname 1
 	 * @param paFilename2 Dateiname 2
 	 */
-	public void compare(String paFilename1, String paFilename2) {
-		fileHandler.setCurrentFile(paFilename1);
-		File file1 = fileHandler.getFile();
-		fileHandler.setCurrentFile(paFilename2);
-		File file2 = fileHandler.getFile();
-		logger.info("Vergleiche Dateien " + file1.getName() + " und " + file2.getName() + ":");
-		// TODO Vergleichen
+	public void compare(String pName, String vAlt, String vNeu) {
+		
+		fileHandler.setCurrentFile(pName);
+		File f1 = fileHandler.getOldFile(Integer.parseInt(vAlt));
+		File f2 = fileHandler.getOldFile(Integer.parseInt(vNeu));
+		
+		logger.info("Vergleiche Dateien " + f1.getName() + " und " + f2.getName() + ":");
+	
+		ArrayList<String> Zeilen1 = new ArrayList<String>();
+		ArrayList<String> Zeilen2 = new ArrayList<String>();
+		
+		Map<Integer,String> gelöscht = new HashMap<Integer,String>();
+		Map<Integer,String> hinzugefügt = new HashMap<Integer,String>();
+		
+		try (BufferedReader reader = new BufferedReader(new FileReader(f1))) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				Zeilen1.add(line);
+			}
+		} catch (IOException e) {
+			logger.severe("Fehler beim lesen von Datei 1");
+			e.printStackTrace();
+		}
+		try (BufferedReader reader = new BufferedReader(new FileReader(f2))) {
+			String line;
+			while ((line = reader.readLine()) != null) {
+				Zeilen2.add(line);
+			}
+		} catch (IOException e) {
+			logger.severe("Fehler beim lesen von Datei 2");
+			e.printStackTrace();
+		}
+
+	
+		System.out.println("Hinzugefügt wurden:");
+		
+		for(int i = 0; i<Zeilen2.size();i++) {
+			if(!Zeilen1.contains(Zeilen2.get(i))){
+				hinzugefügt.put(i+1, Zeilen2.get(i));//Falls die Visualisierung geändert wird kann man darauf aufbauen
+				System.out.println(i+1 + ": " + Zeilen2.get(i));
+			}
+
+		}
+		System.out.println("Gelöscht wurden:");
+		for(int i = 0; i<Zeilen1.size();i++) {
+			if(!Zeilen2.contains(Zeilen1.get(i))){
+				gelöscht.put(i+1, Zeilen1.get(i));//Falls die Visualisierung geändert wird kann man darauf aufbauen
+				System.out.println(i+1 + ": " + Zeilen1.get(i));
+			}
+		}
+		
 	}
 
 	/**
