@@ -76,13 +76,13 @@ public class consoleScanner {
 		{
 			input = scanner.nextLine();
 			logger.info("Eingegebener Befehl: "+input);
-			evaluateConsoleInput(input);
 			if(input.equals("exit")) 
 			{
 				writeConsole("Die Console wird geschlossen.");
 				logger.info("Die Console wird geschlossen.");
 				break;
 			}
+			evaluateConsoleInput(input);
 		}
 		scanner.close();
 	}
@@ -121,7 +121,9 @@ public class consoleScanner {
 					+ "view\tDatei anzeigen (Parameter: Dateiname)\n"
 					+ "\tDatei der Version n anzeigen (Parameter: Dateiname Version)\n"
 					+ "upld\tDatei hochladen (Parameter: Pfad zur Datei)\n\n"
-					+ "Beispiel: edit MyApp.java");
+					+ "Beispiel:\tedit MyApp\n"
+					+ "Beispiel2:\tview App 2\n\n"
+					+ "Dateinamen immer ohne Endung angeben, Pfade mit Dateinamen+Endung");
 			break;
 		case "comp":
 			try {
@@ -188,14 +190,27 @@ public class consoleScanner {
 			}
 			break;
 		case "view":
-			try {
-				service.viewFile(input[1]);
-				logger.info("Die Funktion "+input[0]+" war erfolgreich.");
+			if(input.length<2) {
+				try {
+					service.viewFile(input[1]);
+					logger.info("Die Funktion "+input[0]+" war erfolgreich.");
+				}
+				catch(Exception e) {
+					logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion "+input[0]+" aufgetreten:"
+							+e);
+					e.printStackTrace();
+				}
 			}
-			catch(Exception e) {
-				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion "+input[0]+" aufgetreten:"
-						+e);
-				e.printStackTrace();
+			else {
+				try {
+					service.viewFileOfVersion(input[1],input[2]);
+					logger.info("Die Funktion "+input[0]+" war erfolgreich.");
+				}
+				catch(Exception e) {
+					logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion "+input[0]+" aufgetreten:"
+							+e);
+					e.printStackTrace();
+				}
 			}
 			break;
 		case "upld":
