@@ -189,6 +189,7 @@ public class consoleScanner {
 			if(input.length<3) {
 				try {
 					logger.info("Die Funktion "+input[0]+" war erfolgreich.");
+					service.viewFile(input[1]);
 				}
 				catch(Exception e) {
 					logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion "+input[0]+" aufgetreten:"
@@ -199,6 +200,7 @@ public class consoleScanner {
 			else {
 				try {
 					logger.info("Die Funktion "+input[0]+" war erfolgreich.");
+					service.viewFileOfVersion(input[1], input[2]);
 				}
 				catch(Exception e) {
 					logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion "+input[0]+" aufgetreten:"
