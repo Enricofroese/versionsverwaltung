@@ -188,7 +188,6 @@ public class consoleScanner {
 		case "view":
 			if(input.length<3) {
 				try {
-					fileToConsole(service.viewFile(input[1]));
 					logger.info("Die Funktion "+input[0]+" war erfolgreich.");
 				}
 				catch(Exception e) {
@@ -199,7 +198,6 @@ public class consoleScanner {
 			}
 			else {
 				try {
-					fileToConsole(service.viewFileOfVersion(input[1],input[2]));
 					logger.info("Die Funktion "+input[0]+" war erfolgreich.");
 				}
 				catch(Exception e) {

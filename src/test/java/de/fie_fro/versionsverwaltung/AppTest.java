@@ -52,7 +52,7 @@ public class AppTest
 	@DisplayName("Upload-Zweite-Dateiversion")
 	public void testUploadNewVersion() {
 		boolean vorhanden = false;
-    	serv.uploadExistingFileWithNewVersion(".\\src\\test\\v2\\testupload.txt");
+    	serv.uploadNewVersion("testupload", ".\\src\\test\\v2\\testupload.txt");
     	Integer[] hist = serv.getFileVersionHistory("testupload");
     	for(int i = 0; i<hist.length;i++) {
 			if(hist[i] == 2){
