@@ -28,7 +28,7 @@ public class consoleScanner {
 	public static void initializeLogger() {
 		final LogManager logManager = LogManager.getLogManager();
 		try {
-			logManager.readConfiguration(new FileInputStream("./src/main/LoggerVersionsverwaltung.properties"));
+			logManager.readConfiguration(new FileInputStream("./LoggerVersionsverwaltung.properties"));
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
@@ -83,6 +83,7 @@ public class consoleScanner {
 				writeConsole("Die Console wird geschlossen.");
 				logger.info("Die Console wird geschlossen.");
 				scanner.close();
+				System.exit(0);
 				break;
 			}
 			evaluateConsoleInput(input);

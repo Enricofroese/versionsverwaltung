@@ -14,8 +14,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.7</maven.compiler.source>
-    <maven.compiler.target>1.7</maven.compiler.target>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
 
   <dependencies>
@@ -46,6 +46,26 @@
         <plugin>
           <artifactId>maven-resources-plugin</artifactId>
           <version>3.0.2</version>
+          <executions>
+		        <execution>
+		            <id>copy-resource-one</id>
+		            <phase>generate-sources</phase>
+		            <goals>
+		                <goal>copy-resources</goal>
+		            </goals>
+		            <configuration>
+		                <outputDirectory>${basedir}/target</outputDirectory>
+		                <resources>
+		                    <resource>
+		                        <directory>src/main</directory>
+		                        <includes>
+		                            <include>LoggerVersionsverwaltung.properties</include>
+		                        </includes>
+		                    </resource>
+		                </resources>
+		            </configuration>
+		        </execution>
+		    </executions>
         </plugin>
         <plugin>
           <artifactId>maven-compiler-plugin</artifactId>
@@ -58,6 +78,14 @@
         <plugin>
           <artifactId>maven-jar-plugin</artifactId>
           <version>3.0.2</version>
+          <configuration>
+          <archive>
+            <manifest>
+              <addClasspath>true</addClasspath>
+              <mainClass>de.fie_fro.versionsverwaltung.consoleScanner</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>

@@ -55,7 +55,7 @@ public class Service {
     final LogManager logManager = LogManager.getLogManager();
     try {
       logManager.readConfiguration(new FileInputStream(
-              "./src/main/LoggerVersionsverwaltung.properties"));
+              "./LoggerVersionsverwaltung.properties"));
     } catch (Exception e) {
       e.printStackTrace();
     }
