@@ -54,7 +54,7 @@
 		                <goal>copy-resources</goal>
 		            </goals>
 		            <configuration>
-		                <outputDirectory>${basedir}/target</outputDirectory>
+		                <outputDirectory>${basedir}/target/src/main</outputDirectory>
 		                <resources>
 		                    <resource>
 		                        <directory>src/main</directory>

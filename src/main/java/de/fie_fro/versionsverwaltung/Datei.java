@@ -26,7 +26,7 @@ public class Datei extends File{
 	public static void initializeLogger() {
 		final LogManager logManager = LogManager.getLogManager();
 		try {
-			logManager.readConfiguration(new FileInputStream("./LoggerVersionsverwaltung.properties"));
+			logManager.readConfiguration(new FileInputStream("./src/main/LoggerVersionsverwaltung.properties"));
 		} 
 		catch (Exception e) {
 			e.printStackTrace();

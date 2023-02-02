@@ -28,7 +28,7 @@ public class consoleScanner {
 	public static void initializeLogger() {
 		final LogManager logManager = LogManager.getLogManager();
 		try {
-			logManager.readConfiguration(new FileInputStream("./LoggerVersionsverwaltung.properties"));
+			logManager.readConfiguration(new FileInputStream("./src/main/LoggerVersionsverwaltung.properties"));
 		} 
 		catch (Exception e) {
 			e.printStackTrace();
@@ -113,8 +113,9 @@ public class consoleScanner {
 					+ "newf\tNeue Datei erstellen (Parameter: PfadZurDatei)\n"
 					+ "setv\tVersion als aktuell setzen (Parameter: Dateiname Version)\n"
 					+ "vhis\tVersionshistorie anzeigen (Parameter: Dateiname)\n"
-					+ "view\tDatei anzeigen (Parameter: Dateiname)\n"
+					+ "view-v\tDatei anzeigen (Parameter: Dateiname)\n"
 					+ "\tDatei der Version n anzeigen (Parameter: Dateiname Version)\n"
+					+ "view\tDatei herunterladen zum Anzeigen (Parameter: Dateiname)\n"
 					+ "upld\tDatei hochladen (Parameter: Dateiname PfadZurDatei)\n\n"
 					+ "Beispiel:\tedit MyApp\n"
 					+ "Beispiel2:\tview App2\n"
@@ -185,7 +186,7 @@ public class consoleScanner {
 				e.printStackTrace();
 			}
 			break;
-		case "view":
+		case "view-v":
 			if(input.length<3) {
 				try {
 					logger.info("Die Funktion " + input[0] + " war erfolgreich.");
@@ -207,6 +208,17 @@ public class consoleScanner {
 							+e);
 					e.printStackTrace();
 				}
+			}
+			break;
+		case "view":
+			try {
+				service.viewFileDownload(input[1]);
+				logger.info("Die Funktion " + input[0] + " war erfolgreich.");
+			}
+			catch(Exception e) {
+				logger.severe("Folgende Exception ist bei dem Aufruf von der Funktion " + input[0] + " aufgetreten:"
+						+e);
+				e.printStackTrace();
 			}
 			break;
 		case "upld":

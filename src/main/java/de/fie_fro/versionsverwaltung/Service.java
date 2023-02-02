@@ -55,7 +55,7 @@ public class Service {
     final LogManager logManager = LogManager.getLogManager();
     try {
       logManager.readConfiguration(new FileInputStream(
-              "./LoggerVersionsverwaltung.properties"));
+              "./src/main/LoggerVersionsverwaltung.properties"));
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -242,6 +242,36 @@ public class Service {
     viewFile(fileHandler.getOldFile(version));
   }
 
+  /**
+   * . Editieren einer Datei
+
+   * @param paFilename Dateiname
+   */
+  public void viewFileDownload(String paFilename) {
+    logger.info("Lade Datei herunter " + paFilename);
+    try {
+      fileHandler.setCurrentFile(paFilename);
+    } catch (Exception e) {
+      logger.severe("Datei konnte nicht gefunden werden");
+    }
+    JFileChooser fileChooser = new JFileChooser();
+    int returnValue = fileChooser.showSaveDialog(null);
+    if (returnValue == JFileChooser.APPROVE_OPTION) {
+      File selectedFile = fileChooser.getSelectedFile();
+      try {
+        Files.copy(fileHandler.getFile().toPath(), selectedFile.toPath());
+      } catch (IOException e) {
+        logger.severe(
+            "Folgende Exception ist bei der Ausführung der Methode viewFileDownload aufgetreten:" 
+                    + e.getMessage());
+        e.printStackTrace();
+
+      }
+      return;
+    }
+    logger.severe("Es gab einen Fehler.");
+  }
+  
   /**
    * . Neue Version einer Datei hochladen
 
